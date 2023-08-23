@@ -1,0 +1,20 @@
+- changing basepath
+e.g. 
+import Heading from "@/components/Heading";
+--> create jsconfig.json, add the below text:
+{
+    "compilerOptions": {
+        "paths": {
+            "@/*": ["./*"]
+        }
+    }
+}
+
+- lib directory: all js code for non react components
+
+- render SSG (static site generation) --> generated at build time
+(export) use the generateStaticParams async function, return a list of objects: [{slug: "SLUG-NAME-1"}, {slug: "SLUG-NAME-2"}, ...]
+export async function generateStaticParams() {
+  const slugs = await getSlugs();
+  return slugs.map((slug) => ({ slug }));
+}
