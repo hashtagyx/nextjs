@@ -6,6 +6,15 @@ export async function generateStaticParams() {
   return slugs.map((slug) => ({ slug }));
 }
 
+export async function generateMetadata({params: { slug }}) {
+ const review = await getReview(slug);
+  return {
+    title: review.title,
+    description: 'Only the best indie games, reviewed for you.',
+  };
+  
+};
+
 export default async function ReviewPage({ params: { slug }}) {
   const review = await getReview(slug);
   console.log('[ReviewPage] rendering:', slug);
