@@ -4,6 +4,7 @@ import { getSlugs, getReview } from "@/lib/reviews";
 
 export async function generateStaticParams() {
   const slugs = await getSlugs();
+  console.log('[ReviewPage] generateStaticParams:', slugs);
   return slugs.map((slug) => ({ slug }));
 }
 
@@ -17,7 +18,7 @@ export async function generateMetadata({ params: { slug } }) {
 
 export default async function ReviewPage({ params: { slug } }) {
   const review = await getReview(slug);
-  console.log("[ReviewPage] rendering:", slug);
+  // console.log("[ReviewPage] rendering:", review);
   return (
     <>
       <Heading>{review.title}</Heading>
