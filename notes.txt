@@ -18,3 +18,9 @@ export async function generateStaticParams() {
   const slugs = await getSlugs();
   return slugs.map((slug) => ({ slug }));
 }
+
+use qs library along with strapi as the content management system (CMS, easy way to enter
+new data and serves as an API endpoint) to tailor API responses.
+
+when we run `npm run dev` or `npm start` etc, in our package.json file we can
+see which script it is mapped to. the script is located in node_modules/.bin/(react_scripts) or (next)

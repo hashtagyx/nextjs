@@ -1,6 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
 import Heading from "@/components/Heading";
 import { getReviews } from "@/lib/reviews";
+
+// export const dynamic = 'force-dynamic';
+// export const revalidate = 30; // revalidate every 30 seconds
 
 export const metadata = {
   title: 'Reviews',
@@ -8,26 +12,27 @@ export const metadata = {
 };
 
 export default async function ReviewsPage() {
-  const reviews = await getReviews();
-  console.log('[ReviewPage] reviews:', reviews);
+  const reviews = await getReviews(6);
+  console.log('[ReviewPage] reviews:', reviews.map((rev) => rev.slug).join(', '));
   return (
     <>
       <Heading>Reviews</Heading>
-      <p>Here we'll list all the reviews.</p>
+      <p>Here we&apos;ll list all the reviews.</p>
       <ul className="flex flex-wrap flex-row gap-3">
-        {reviews.map(({ slug, title, image }) => {
+        {reviews.map((review, index) => {
           return (
-            <li key={slug} className="border rounded shadow hover:shadow-xl w-80 bg-white">
-              <Link href={`/reviews/${slug}`}>
-                <img
-                  src={image}
+            <li key={review.slug} className="border rounded shadow hover:shadow-xl w-80 bg-white">
+              <Link href={`/reviews/${review.slug}`}>
+                <Image
+                  src={review.image}
                   alt=""
                   width="320"
                   height="180"
                   className="rounded-t"
+                  priority={index===0}
                 />
                 <h2 className="font-semibold font-orbitron text-center py-1">
-                  {title}
+                  {review.title}
                 </h2>
               </Link>
             </li>
