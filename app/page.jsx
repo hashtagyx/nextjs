@@ -12,7 +12,7 @@ import { getReviews } from "@/lib/reviews";
 // default: server component (html rendered on server)
 // client components: rendered on server + client, can use client-side functionality
 export default async function HomePage() {
-  const reviews = await getReviews(3);
+  const { reviews } = await getReviews(3);
   console.log("[HomePage] rendering", reviews.map((rev) => rev.slug).join(', '));
   return (
     <>

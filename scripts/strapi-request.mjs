@@ -3,11 +3,11 @@ import qs from 'qs';
 // const url = 'http://localhost:1337/api/reviews' + '?populate=*';
 
 const url = 'http://localhost:1337/api/reviews' + '?' + qs.stringify({
-    filters: { slug: { $eq: 'hades-2018' } },
-    fields: ['slug', 'title', 'subtitle', 'publishedAt', 'body'],
-    populate: { image: { fields: ['url' ] } },
-    pagination: { pageSize: 1, withCount: false },
-    // sort: ['publishedAt:desc'],
+    fields: ["slug", "title", "subtitle", "publishedAt"],
+    populate: { image: { fields: ["url"] } },
+    //  pagination: { pageSize: pageSize }, // functionally identical to:
+    pagination: { pageSize: 6, page: 1 },
+    sort: ["publishedAt:desc"],
 }, { encodeValuesOnly: true});
 
 // console.log('url:', url);
